@@ -1,0 +1,23 @@
+@import "colors.module";
+@import "mixins";
+
+.header {
+  background-color: $black;
+  padding: 32px 24px 33px;
+  display: flex;
+  gap: 1.5rem;
+  justify-content: space-between;
+  align-items: center;
+
+  button {
+    all: unset;
+    cursor: pointer;
+    display: flex;
+  }
+
+  .burgerMenu {
+    @include desktop() {
+      display: none;
+    }
+  }
+}
