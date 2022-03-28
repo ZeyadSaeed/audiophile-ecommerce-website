@@ -3,21 +3,282 @@
 
 .header {
   background-color: $black;
-  padding: 32px 24px 33px;
-  display: flex;
-  gap: 1.5rem;
-  justify-content: space-between;
-  align-items: center;
+  padding: 32px 24px 33px 24px;
 
-  button {
-    all: unset;
-    cursor: pointer;
+  @include tablet() {
+    padding: 32px 40px 33px 39px;
+  }
+
+  &__container {
     display: flex;
+    gap: 1.5rem;
+    max-width: 69.375rem;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+
+    @include tablet() {
+      gap: 2.625rem;
+      justify-content: flex-start;
+    }
+    @include desktop() {
+      justify-content: space-between;
+    }
   }
 
   .burgerMenu {
     @include desktop() {
       display: none;
+    }
+  }
+
+  .logo {
+    cursor: pointer;
+    display: flex;
+  }
+
+  .cart {
+    @include tablet() {
+      margin-left: auto;
+    }
+    @include desktop() {
+      margin-left: 0;
+    }
+  }
+
+  .headerNavContainer {
+    display: none;
+
+    @include desktop() {
+      display: flex;
+      gap: 34px;
+      text-transform: uppercase;
+    }
+  }
+
+  .headerNavLink {
+    color: white;
+    font-weight: bold;
+    font-size: 13px;
+    transition: 100ms;
+
+    &:hover {
+      color: $brown;
+    }
+  }
+
+  button {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    display: flex;
+  }
+}
+
+.bestGears {
+  padding: 24px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  max-width: 69.375rem;
+  margin: auto;
+  margin-block: 120px;
+
+  @include tablet() {
+    margin-block: 96px;
+  }
+
+  @include desktop() {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    padding: 0;
+    text-align: start;
+    margin-block: 200px;
+  }
+
+  .bestGearsImage {
+    border-radius: 8px;
+  }
+
+  .bestGearsTextContainer {
+    @include tablet() {
+      max-width: 573px;
+    }
+
+    @include desktop() {
+      max-width: 445px;
+    }
+  }
+  .bestGearsTitle {
+    text-transform: uppercase;
+    font-size: 28px;
+    margin-block: 32px;
+    letter-spacing: 1px;
+
+    span {
+      color: $brown;
+    }
+
+    @include tablet() {
+      font-size: 40px;
+      letter-spacing: 1.43px;
+    }
+  }
+
+  .besGearsParagraph {
+    opacity: 0.5;
+    font-size: 15px;
+  }
+}
+
+// FOOTER
+.footer {
+  background-color: $lighterBlack;
+  color: $white;
+
+  .footerContainer {
+    max-width: 69.375rem;
+    margin: auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 48px;
+    padding-inline: 24px;
+
+    @include tablet() {
+      padding-left: 39px;
+      padding-right: 40px;
+      gap: 32px;
+      align-items: flex-start;
+    }
+
+    @include desktop() {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      align-items: flex-end;
+      width: 100%;
+      padding: 0;
+    }
+  }
+  .topFooter {
+    position: absolute;
+    top: 0;
+    width: 101px;
+    height: 4px;
+    background-color: $brown;
+
+    @include tablet() {
+      left: 39px;
+    }
+
+    @include desktop() {
+      left: 0;
+    }
+  }
+
+  .footerLogo {
+    margin-top: 52px;
+  }
+
+  .footerNavContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 13px;
+    gap: 1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+
+    @include tablet() {
+      align-items: flex-start;
+      justify-content: center;
+      flex-direction: row;
+      gap: 34px;
+    }
+  }
+
+  .footerNavLink {
+    font-size: 13px;
+
+    @include desktop() {
+      &:hover {
+        color: $brown;
+        transition: 100ms;
+      }
+    }
+  }
+
+  .footerBottomContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    align-items: center;
+
+    @include tablet() {
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+      align-items: center;
+      margin-bottom: 46px;
+      margin-top: 32px;
+    }
+    @include desktop() {
+      grid-area: 3 / 1;
+      grid-column: 1 / 3;
+      width: 100%;
+    }
+  }
+
+  p {
+    text-align: center;
+    font-size: 15px;
+    opacity: 0.5;
+
+    @include tablet() {
+      text-align: start;
+    }
+    @include desktop() {
+      max-width: 540px;
+    }
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 1rem;
+    width: max-content;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 38px;
+
+    @include tablet() {
+      margin-bottom: 0;
+    }
+
+    @include desktop() {
+      position: relative;
+      bottom: 5.25rem;
+    }
+
+    li {
+      filter: invert(100%) sepia(9%) saturate(7500%) hue-rotate(258deg)
+        brightness(118%) contrast(108%);
+      transition: 100ms;
+    }
+
+    li:hover {
+      @include desktop() {
+        filter: invert(84%) sepia(39%) saturate(6521%) hue-rotate(329deg)
+          brightness(92%);
+      }
     }
   }
 }
