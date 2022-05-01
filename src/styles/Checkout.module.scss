@@ -1,0 +1,320 @@
+@import "mixins";
+@import "./Variables.module";
+
+.main {
+  background-color: #f2f2f2;
+  padding-bottom: 97px;
+
+  @include tablet() {
+    padding-bottom: 116px;
+  }
+  @include desktop() {
+  }
+  section {
+    padding-inline: 24px;
+    margin: auto;
+    max-width: 69.375rem;
+
+    @include tablet() {
+      padding-left: 39px;
+      padding-right: 40px;
+    }
+
+    @include desktop() {
+      padding: 0;
+    }
+  }
+
+  form {
+    @include desktop() {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 30px;
+    }
+
+    .checkoutForm {
+      background-color: $white;
+      border-radius: 8px;
+      padding: 24px;
+
+      @include tablet() {
+        padding-block: 30px;
+        padding-inline: 27.5px;
+      }
+      @include desktop() {
+        padding-block: 54px;
+        padding-inline: 47.5px;
+        min-width: 730px;
+        margin-bottom: 141px;
+      }
+    }
+    .billingDetails {
+      display: grid;
+      gap: 16px;
+      @include tablet() {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    .shippingInfo {
+      display: grid;
+      gap: 24px;
+
+      @include tablet() {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        column-gap: 0;
+      }
+
+      label:first-child {
+        @include tablet() {
+          grid-column: 1 / 4;
+        }
+      }
+      label:nth-child(2) {
+        @include tablet() {
+          margin-right: 16px;
+        }
+      }
+
+      label:last-child {
+        @include tablet() {
+          grid-row: 3;
+          margin-right: 16px;
+        }
+      }
+    }
+    h1 {
+      font-size: 28px;
+      line-height: 38px;
+      letter-spacing: 1px;
+    }
+    h2 {
+      color: $brown;
+      font-size: 13px;
+      line-height: 25px;
+      letter-spacing: 0.93px;
+      margin-block: 1rem;
+      margin-top: 32px;
+    }
+    label {
+      font-size: 12px;
+      font-weight: 700;
+    }
+    input:not([type="radio"]) {
+      width: 100%;
+      margin-top: 7px;
+      border-radius: $borderRadius;
+      height: 56px;
+      border: 1px solid #cfcfcf;
+      padding-inline: 24px;
+      padding-block: 18px;
+      font-size: 14px;
+      letter-spacing: -0.25px;
+      line-height: 19px;
+    }
+    .checkoutForm > div {
+      display: grid;
+    }
+
+    input[name="address"] {
+      max-width: 100%;
+    }
+    input::placeholder {
+      opacity: 0.4;
+      color: black;
+    }
+    input:focus {
+      border: 1px solid $brown;
+      outline: none;
+    }
+    div.paymentDetails {
+      .radioInput {
+        display: grid;
+        gap: 1rem;
+        margin-bottom: 8px;
+
+        @include tablet() {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      .paymentMethodContainer {
+        display: flex;
+        align-items: center;
+        border: 1px solid #cfcfcf;
+        border-radius: $borderRadius;
+        height: 56px;
+        cursor: pointer;
+      }
+      .paymentMethodContainer:hover {
+        border: 1px solid $brown;
+      }
+      .inputRadioContainer {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+      input[type="radio"] {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        border: 1px solid #cfcfcf;
+        border-radius: 100%;
+        margin: 0;
+        position: relative;
+        margin-inline: 16px;
+      }
+
+      input[type="radio"]::after {
+        content: "";
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background-color: transparent;
+        border-radius: 100%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      input[type="radio"]:checked::after {
+        background-color: $brown;
+      }
+    }
+    .eMoneyContainer {
+      display: grid;
+      gap: 24px;
+
+      @include tablet() {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+    }
+    .cashOnDeliveryInfo {
+      display: grid;
+      grid-template-columns: 1fr;
+      text-align: center;
+      gap: 32px;
+
+      @include tablet() {
+        grid-template-columns: 48px 1fr;
+        text-align: start;
+      }
+
+      p {
+        font-size: 15px;
+        opacity: 0.5;
+      }
+    }
+  }
+  .summary {
+    background-color: $white;
+    border-radius: $borderRadius;
+    margin-top: 16px;
+    padding-inline: 24px;
+    padding-block: 32px;
+    height: fit-content;
+    position: relative;
+    min-height: 300px;
+
+    .loadingSpinner {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    @include tablet() {
+      margin-top: 32px;
+    }
+
+    @include desktop() {
+      max-width: 350px;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 18px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      display: grid;
+      margin: 0;
+      margin-top: 31px;
+      margin-bottom: 32px;
+      gap: 24px;
+    }
+    li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    div {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    b {
+      font-size: 15px;
+    }
+    span {
+      color: $black;
+      opacity: 0.5;
+      font-weight: bold;
+      font-size: 14px;
+    }
+    .quantity {
+      font-size: 15px;
+    }
+    img {
+      border-radius: $borderRadius;
+    }
+
+    .pricesContainer {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      div.grandTotal {
+        margin-top: 1rem;
+        margin-bottom: 32px;
+
+        b {
+          color: $brown;
+        }
+      }
+
+      div {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+
+        b {
+          font-size: 18px;
+          line-height: 24px;
+        }
+      }
+
+      p {
+        font-size: 15px;
+        opacity: 0.5;
+      }
+      button {
+        width: 100%;
+        height: 48px;
+        border: none;
+        background-color: $brown;
+        color: white;
+        font-size: 13px;
+        font-weight: bold;
+        cursor: pointer;
+        letter-spacing: 1px;
+      }
+      button:hover {
+        background-color: $lighterBrown;
+      }
+    }
+  }
+}

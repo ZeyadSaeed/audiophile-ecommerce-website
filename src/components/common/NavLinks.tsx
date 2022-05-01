@@ -1,5 +1,4 @@
 import Link from "next/link";
-import styles from "@/styles/Layout.module.scss";
 
 const NavLinks = ({
   navClass,
@@ -8,13 +7,13 @@ const NavLinks = ({
   navClass: string;
   linkClass: string;
 }) => {
-  const navLinks = ["home", "headphones", "speakers", "earphones"];
+  const navLinks = ["/home", "/headphones", "/speakers", "/earphones"];
 
   return (
     <nav className={navClass}>
       {navLinks.map((link) => (
-        <Link href={link === "home" ? "/" : link} key={link}>
-          <a className={linkClass}>{link}</a>
+        <Link href={link === "/home" ? "/" : link} key={link}>
+          <a className={linkClass}>{link.slice(1)}</a>
         </Link>
       ))}
     </nav>

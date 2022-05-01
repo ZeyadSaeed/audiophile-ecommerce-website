@@ -1,0 +1,19 @@
+@import "mixins";
+@import "./Variables.module";
+
+.main {
+  section {
+    padding-inline: 24px;
+    margin: auto;
+    max-width: 69.375rem;
+
+    @include tablet() {
+      padding-left: 39px;
+      padding-right: 40px;
+    }
+
+    @include desktop() {
+      padding: 0;
+    }
+  }
+}

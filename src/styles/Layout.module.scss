@@ -1,4 +1,4 @@
-@import "colors.module";
+@import "Variables.module";
 @import "mixins";
 
 .header {
@@ -16,6 +16,7 @@
     justify-content: space-between;
     align-items: center;
     margin: auto;
+    z-index: 1000;
 
     @include tablet() {
       gap: 2.625rem;
@@ -27,8 +28,67 @@
   }
 
   .burgerMenu {
+    user-select: none;
     @include desktop() {
       display: none;
+    }
+  }
+  .blackScreen {
+    position: absolute;
+    top: 90px;
+    height: 100vh;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: black;
+    z-index: 10;
+    opacity: 0.4;
+  }
+  .blackScreenFullScreen {
+    position: fixed;
+    top: 0;
+  }
+  .burgerMenuOpen {
+    position: absolute;
+    background-color: white;
+    z-index: 100;
+    top: 90px;
+    left: 0;
+    padding: 24px;
+    right: 0;
+    border-radius: 0 0 8px 8px;
+    width: 100%;
+    border: none;
+    animation: navBarOpenAnimation 200ms ease-in-out;
+    transform-origin: top;
+
+    @include tablet() {
+      padding-left: 40px;
+      padding-right: 39px;
+      padding-bottom: 67px;
+    }
+
+    &::backdrop {
+      background-color: red;
+    }
+
+    & > section > div {
+      margin-top: -8px;
+      @include tablet() {
+        margin-top: 84px;
+      }
+    }
+    & > section > div:not(:first-child) {
+      margin-top: 68px;
+      @include tablet() {
+        margin-top: 84px;
+      }
+    }
+    & > section > div:last-child {
+      margin-bottom: 11px;
+      @include tablet() {
+        margin-bottom: 0;
+      }
     }
   }
 
@@ -38,11 +98,181 @@
   }
 
   .cart {
+    user-select: none;
     @include tablet() {
       margin-left: auto;
     }
     @include desktop() {
       margin-left: 0;
+    }
+  }
+
+  .cartOpenContainer {
+    position: absolute;
+    width: calc(100% - 48px);
+    max-width: 1110px;
+    margin: auto;
+    z-index: 100;
+    top: 112px;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+
+    & > div {
+      background-color: white;
+      max-width: 377px;
+      padding: 28px;
+      padding-block: 32px;
+      width: 100%;
+      border-radius: $borderRadius;
+      position: relative;
+
+      .topContainer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 31px;
+      }
+      .loadingSpinner {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .cartTotalPrice {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 32px;
+        margin-bottom: 24px;
+
+        p {
+          font-size: 15px;
+          opacity: 0.5;
+          line-height: 25px;
+        }
+
+        b {
+          font-size: 18px;
+          line-height: 25px;
+        }
+      }
+
+      h2 {
+        font-size: 18px;
+        line-height: 25.59px;
+        letter-spacing: 1.29px;
+        text-transform: uppercase;
+      }
+
+      .removeBtn {
+        opacity: 0.5;
+        font-size: 15px;
+        text-decoration: underline;
+
+        &:hover {
+          color: $brown;
+          opacity: 1;
+        }
+      }
+
+      .checkoutBtn {
+        width: 100%;
+        background-color: $brown;
+        color: $white;
+        height: 48px;
+        font-size: 13px;
+        line-height: 18px;
+        letter-spacing: 1px;
+
+        &:hover {
+          background-color: $lighterBrown;
+        }
+
+        a {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      li {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+      }
+
+      div:first-child {
+        display: flex;
+        gap: 1rem;
+      }
+
+      img {
+        border-radius: $borderRadius;
+      }
+
+      b {
+        font-size: 15px;
+        line-height: 25px;
+
+        span {
+          opacity: 0.5;
+          font-size: 14px;
+        }
+      }
+
+      .quantityBtn {
+        background-color: $gray;
+        display: flex;
+        gap: 11.5px;
+        align-items: center;
+        justify-content: center;
+        width: 96px;
+        height: 32px;
+
+        b {
+          font-size: 13px;
+          letter-spacing: 1px;
+        }
+
+        button {
+          background-color: transparent;
+          outline: none;
+          border: none;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          height: 100%;
+          opacity: 0.25;
+        }
+
+        button:hover {
+          opacity: 1;
+          color: $brown;
+          transition: 100ms;
+        }
+
+        button:disabled,
+        button:disabled:hover {
+          color: black;
+          opacity: 0.25;
+          cursor: default;
+        }
+      }
     }
   }
 
@@ -79,7 +309,6 @@
 }
 
 .bestGears {
-  padding: 24px;
   text-align: center;
   display: flex;
   align-items: center;
@@ -87,9 +316,11 @@
   max-width: 69.375rem;
   margin: auto;
   margin-block: 120px;
+  padding-inline: 24px;
 
   @include tablet() {
-    margin-block: 96px;
+    padding-left: 39px;
+    padding-right: 40px;
   }
 
   @include desktop() {
@@ -97,11 +328,11 @@
     justify-content: space-between;
     padding: 0;
     text-align: start;
-    margin-block: 200px;
+    margin-block: 160px;
   }
 
   .bestGearsImage {
-    border-radius: 8px;
+    border-radius: $borderRadius;
   }
 
   .bestGearsTextContainer {
@@ -135,7 +366,17 @@
   }
 }
 
-// FOOTER
+.bestGearsHome {
+  margin-block: 120px;
+  @include tablet() {
+    margin-block: 96px;
+  }
+
+  @include desktop() {
+    margin-block: 200px;
+  }
+}
+
 .footer {
   background-color: $lighterBlack;
   color: $white;
@@ -280,5 +521,22 @@
           brightness(92%);
       }
     }
+  }
+}
+
+@keyframes navBarOpenAnimation {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+@keyframes navBarCloseAnimation {
+  from {
+    transform: scaleY(1);
+  }
+  to {
+    transform: scaleY(0);
   }
 }

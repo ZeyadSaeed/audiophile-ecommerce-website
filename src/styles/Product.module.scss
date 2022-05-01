@@ -1,0 +1,378 @@
+@import "mixins";
+@import "./Variables.module";
+
+.main {
+  max-width: 69.375rem;
+  margin: auto;
+  padding-inline: 24px;
+
+  @include tablet() {
+    padding-left: 39px;
+    padding-right: 40px;
+  }
+
+  @include desktop() {
+    padding: 0;
+  }
+}
+
+.goBackBtn {
+  font-size: 15px;
+  line-height: 25px;
+  opacity: 0.5;
+  padding-top: 1rem;
+  display: block;
+  padding-bottom: 1.5rem;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    color: $brown;
+    opacity: 1;
+  }
+
+  @include tablet() {
+    padding-top: 33px;
+  }
+
+  @include desktop() {
+    padding-top: 79px;
+    padding-bottom: 56px;
+  }
+}
+
+.productInfoSection {
+  display: flex;
+  flex-direction: column;
+  gap: 88px;
+
+  @include tablet() {
+    gap: 120px;
+  }
+
+  section:first-child {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    @include tablet() {
+      flex-direction: row;
+      gap: 69px;
+    }
+
+    @include desktop() {
+      justify-content: space-between;
+    }
+  }
+  img {
+    border-radius: $borderRadius;
+  }
+  .productImage {
+    @include tablet() {
+      max-width: 281px;
+    }
+
+    @include desktop() {
+      max-width: 540px;
+    }
+  }
+  .headInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    @include desktop() {
+      max-width: 445.5px;
+    }
+
+    h1 {
+      font-size: 28px;
+      line-height: 38.25px;
+      letter-spacing: 1px;
+
+      @include tablet() {
+        font-size: 28px;
+        line-height: 32px;
+        letter-spacing: 1px;
+      }
+
+      @include desktop() {
+        font-size: 40px;
+        line-height: 44px;
+        letter-spacing: 1.43px;
+      }
+    }
+  }
+  span {
+    font-size: 14px;
+    line-height: 19.12px;
+    letter-spacing: 10px;
+    text-transform: uppercase;
+    color: $brown;
+    margin-top: 16px;
+
+    @include tablet() {
+      font-size: 12px;
+      line-height: 16.39px;
+      letter-spacing: 8.57px;
+    }
+
+    @include desktop() {
+      font-size: 14px;
+      line-height: 19.12px;
+      letter-spacing: 10px;
+    }
+  }
+
+  p {
+    font-size: 15px;
+    line-height: 25px;
+    opacity: 0.5;
+    padding-right: 5px;
+
+    @include tablet() {
+      padding-right: 0;
+    }
+  }
+
+  .price {
+    font-size: 18px;
+    letter-spacing: 1.29px;
+    line-height: 24.59px;
+  }
+
+  .addCartContainer {
+    display: flex;
+    gap: 1rem;
+
+    .addToCartBtn {
+      background-color: $brown;
+      cursor: pointer;
+      border: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: $white;
+      width: 160px;
+      height: 48px;
+      text-transform: uppercase;
+      font-size: 13px;
+      letter-spacing: 1px;
+    }
+    .addToCartBtn:hover {
+      background-color: $lighterBrown;
+      transition: 100ms;
+    }
+    .addToCartBtn:disabled {
+      background-color: $lighterBrown;
+      cursor: default;
+    }
+    .quantityBtn {
+      background-color: $gray;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      justify-content: center;
+      width: 120px;
+      height: 48px;
+
+      b {
+        font-size: 13px;
+        letter-spacing: 1px;
+      }
+      button {
+        background-color: transparent;
+        outline: none;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        height: 100%;
+        opacity: 0.25;
+      }
+
+      button:hover {
+        opacity: 1;
+        color: $brown;
+        transition: 100ms;
+      }
+
+      button:disabled,
+      button:disabled:hover {
+        color: black;
+        opacity: 0.25;
+        cursor: default;
+      }
+    }
+  }
+}
+
+.features {
+  h1 {
+    text-transform: uppercase;
+    font-size: 24px;
+    line-height: 36px;
+    letter-spacing: 0.86px;
+    margin-bottom: 24px;
+
+    @include tablet() {
+      font-size: 32px;
+      line-height: 36px;
+      letter-spacing: 1.14px;
+      margin-bottom: 32px;
+    }
+  }
+
+  p {
+    font-size: 15px;
+    line-height: 25px;
+  }
+}
+
+.detailsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 88px;
+
+  @include tablet() {
+    gap: 120px;
+  }
+  @include desktop() {
+    flex-direction: row;
+    gap: 125px;
+  }
+}
+
+.inTheBox {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  @include tablet() {
+    flex-direction: row;
+    gap: 11px;
+  }
+  @include desktop() {
+    gap: 32px;
+  }
+
+  @include desktop() {
+    flex-direction: column;
+  }
+
+  h1 {
+    text-transform: uppercase;
+    font-size: 24px;
+    line-height: 36px;
+    letter-spacing: 0.86px;
+
+    @include tablet() {
+      width: 339px;
+      font-size: 32px;
+      line-height: 36px;
+      letter-spacing: 1.14px;
+    }
+  }
+
+  ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0;
+    margin: 0;
+
+    li {
+      display: flex;
+      gap: 8px;
+    }
+    b {
+      color: $brown;
+      width: 18px;
+      font-size: 15px;
+      line-height: 25px;
+    }
+  }
+}
+
+.gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  @include tablet() {
+    flex-direction: row;
+    gap: 18px;
+  }
+
+  @include desktop() {
+    gap: 30px;
+  }
+
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    @include desktop() {
+      gap: 32px;
+    }
+  }
+}
+
+.recommendedProducts {
+  text-align: center;
+  margin-top: 32px;
+
+  @include tablet() {
+    margin-bottom: 36px;
+  }
+
+  @include desktop() {
+    margin-bottom: 104px;
+  }
+
+  h1 {
+    text-transform: uppercase;
+    font-size: 24px;
+    line-height: 36px;
+    margin-bottom: 40px;
+    letter-spacing: 0.86px;
+
+    @include tablet() {
+      font-size: 32px;
+      line-height: 36px;
+      letter-spacing: 1.14px;
+    }
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+
+    @include tablet() {
+      flex-direction: row;
+      gap: 11px;
+    }
+
+    @include desktop() {
+      gap: 30px;
+    }
+  }
+  li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+  }
+
+  h2 {
+    text-transform: uppercase;
+    font-size: 24px;
+    line-height: 32.78px;
+    letter-spacing: 1.71px;
+  }
+}

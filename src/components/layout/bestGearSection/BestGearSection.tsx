@@ -1,10 +1,17 @@
-import styles from "@/styles/Layout.module.scss";
-
 /* eslint-disable @next/next/no-img-element */
+import styles from "@/styles/Layout.module.scss";
+import { useRouter } from "next/router";
+
 const BestGearSection = () => {
+  const { pathname } = useRouter();
+
   return (
-    <section className={styles.bestGears}>
-      <picture className="peer">
+    <section
+      className={`${styles.bestGears} ${
+        pathname === "/" && styles.bestGearsHome
+      }`}
+    >
+      <picture>
         <source
           media="(min-width: 1440px)"
           width={540}
@@ -22,7 +29,7 @@ const BestGearSection = () => {
           width={327}
           height={300}
           src="/shared/mobile/image-best-gear.jpg"
-          alt=""
+          alt="best audio gears"
         />
       </picture>
       <div className={styles.bestGearsTextContainer}>

@@ -1,6 +1,312 @@
 @import "mixins";
-@import "./colors.module";
+@import "./Variables.module";
+
+.main {
+  section {
+    padding-inline: 24px;
+    margin: auto;
+    max-width: 69.375rem;
+
+    @include tablet() {
+      padding-left: 39px;
+      padding-right: 40px;
+    }
+
+    @include desktop() {
+      padding: 0;
+    }
+  }
+}
+
+.headerContainer {
+  background-color: #191919;
+
+  @include tablet() {
+    margin-bottom: 148px;
+  }
+  @include desktop() {
+    margin-bottom: 200px;
+  }
+}
 
 .container {
-  background: red;
+  max-width: 1110px;
+  margin: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  position: relative;
+
+  @include tablet() {
+    width: calc(100% - 79px);
+  }
+
+  @include desktop() {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  div:first-child {
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    background-image: url("/home/mobile/image-header.jpg");
+    background-size: 375px;
+    background-repeat: no-repeat;
+    background-position: 50% 100%;
+    opacity: 0.5;
+
+    @include tablet() {
+      background-image: url("/home/tablet/image-header.jpg");
+      background-size: 768px;
+    }
+
+    @include desktop() {
+      background-image: url("/home/desktop/image-hero.jpg");
+      background-size: cover;
+      top: -50px;
+      background-position: 0% 100%;
+      opacity: 1;
+    }
+  }
+
+  .text {
+    min-height: 511px;
+    max-height: 511px;
+    color: $white;
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 24px;
+    max-width: 400px;
+    margin: auto;
+
+    @include tablet() {
+      min-height: 640px;
+      max-height: 640px;
+    }
+    @include desktop() {
+      align-items: flex-start;
+      text-align: start;
+      justify-content: center;
+      margin: 0;
+      padding: 0;
+      gap: 24px;
+    }
+  }
+
+  span {
+    font-size: 14px;
+    letter-spacing: 10px;
+    opacity: 0.5;
+    margin-bottom: 1rem;
+
+    @include desktop() {
+      margin: 0;
+    }
+  }
+  h1 {
+    font-size: 36px;
+    letter-spacing: 1.29px;
+    line-height: 40px;
+
+    @include tablet() {
+      font-size: 56px;
+      line-height: 58px;
+      letter-spacing: 2px;
+    }
+  }
+  p {
+    margin-block: 24px;
+    font-size: 15px;
+    opacity: 0.75;
+    line-height: 25px;
+
+    @include desktop() {
+      margin: 0;
+    }
+  }
+}
+
+.zx9SpeakerContainer {
+  background-color: $brown;
+  border-radius: $borderRadius;
+  height: 600px;
+  margin-top: 120px;
+  background-image: url("/home/desktop/pattern-circles.svg");
+  background-size: 558px 558px;
+  background-position: 50% -120px;
+  background-repeat: no-repeat;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding-block: 55px;
+  padding-inline: 24px;
+  text-align: center;
+  overflow-y: hidden;
+
+  @include tablet() {
+    background-size: 944px 944px;
+    background-position: 50% -290px;
+    height: 720px;
+    padding-block: 64px;
+    margin-top: 96px;
+  }
+
+  @include desktop() {
+    height: 560px;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding-left: 114px;
+    text-align: start;
+    gap: 155px;
+    background-position: -90% -30px;
+    margin-top: 168px;
+  }
+
+  picture {
+    padding-bottom: 32px;
+
+    @include tablet() {
+      margin-bottom: 64px;
+    }
+    @include desktop() {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      top: 50px;
+      left: 15px;
+      position: relative;
+    }
+  }
+
+  div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+
+    @include desktop() {
+      align-items: flex-start;
+    }
+  }
+  h1 {
+    text-transform: uppercase;
+    font-size: 36px;
+    line-height: 40px;
+    letter-spacing: 1.29px;
+
+    @include tablet() {
+      font-size: 56px;
+      line-height: 58px;
+      letter-spacing: 2px;
+    }
+  }
+
+  p {
+    font-size: 15px;
+    line-height: 25px;
+    max-width: 349px;
+    opacity: 0.75;
+
+    @include tablet() {
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+.zx7SpeakerContainer {
+  background-image: url("/home/mobile/image-speaker-zx7.jpg");
+  border-radius: $borderRadius;
+  background-size: cover;
+  margin-block: 24px;
+  height: 320px;
+  width: 100%;
+  padding-left: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  justify-content: center;
+
+  @media (min-width: 524px) {
+    padding-left: 62px;
+    background-image: url("/home/tablet/image-speaker-zx7.jpg");
+  }
+  @include tablet() {
+    margin-block: 32px;
+  }
+  @media (min-width: 846px) {
+    padding-left: 95px;
+    background-image: url("/home/desktop/image-speaker-zx7.jpg");
+  }
+  @include desktop() {
+    margin-block: 48px;
+  }
+
+  h1 {
+    font-size: 28px;
+    line-height: 38.25px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+}
+
+.yx1earphonesContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  @include tablet() {
+    flex-direction: row;
+    gap: 11px;
+  }
+  @include desktop() {
+    gap: 30px;
+  }
+  img {
+    width: 100%;
+  }
+  div:first-child {
+    width: 100%;
+    border-radius: $borderRadius;
+    height: 200px;
+    overflow: hidden;
+
+    @include tablet() {
+      width: 50%;
+      height: 320px;
+    }
+  }
+
+  div:not(:first-child) {
+    border-radius: $borderRadius;
+    background-color: $gray;
+    height: 200px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 24px;
+    gap: 32px;
+
+    @include tablet() {
+      height: 320px;
+      padding-left: 41px;
+      width: 50%;
+    }
+    @include desktop() {
+      padding-left: 95px;
+    }
+
+    h1 {
+      font-size: 28px;
+      line-height: 38.25px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+  }
 }
