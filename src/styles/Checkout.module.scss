@@ -8,8 +8,7 @@
   @include tablet() {
     padding-bottom: 116px;
   }
-  @include desktop() {
-  }
+
   section {
     padding-inline: 24px;
     margin: auto;
@@ -26,6 +25,29 @@
   }
 
   form {
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /* Firefox */
+    input[type="number"] {
+      -moz-appearance: textfield;
+    }
+    label {
+      position: relative;
+
+      .error {
+        color: $error;
+        position: absolute;
+        right: 0;
+        letter-spacing: -0.2143px;
+        line-height: 16px;
+        font-weight: 500;
+      }
+    }
     @include desktop() {
       display: grid;
       grid-template-columns: 2fr 1fr;

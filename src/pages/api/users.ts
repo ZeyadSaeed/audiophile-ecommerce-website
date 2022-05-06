@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import connectDB from "util/dbConnect";
-import User from "../../models/userModel";
+import User from "../../models/UserModel";
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {

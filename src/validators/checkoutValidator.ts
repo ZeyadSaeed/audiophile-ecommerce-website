@@ -14,8 +14,8 @@ export const checkoutValidation = (checkoutInfo: CheckoutErrorsInterface) => {
     zipCode: Joi.string().min(5).max(255).required(),
     city: Joi.string().min(5).max(55).required(),
     country: Joi.string().min(5).max(55).required(),
-    eMoneyNumber: Joi.string().min(5).max(255).required(),
-    eMoneyPIN: Joi.string().min(5).max(255).required(),
+    eMoneyNumber: Joi.string().min(5).max(255).optional(),
+    eMoneyPIN: Joi.string().min(5).max(255).optional(),
   });
 
   return checkoutSchema.validate(checkoutInfo);

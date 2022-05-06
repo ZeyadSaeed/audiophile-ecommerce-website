@@ -1,6 +1,6 @@
 import connectDB from "util/dbConnect";
 import type { NextApiRequest, NextApiResponse } from "next";
-import Product from "../../../models/productModel";
+import Product from "../../../models/ProductModel";
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {

@@ -6,6 +6,7 @@ import styles from "@/styles/Checkout.module.scss";
 import { checkoutValidation } from "../../validators/checkoutValidator";
 import { CheckoutInfoInterface } from "@/types/checkoutTypes";
 import { FormContext } from "./../../contexts/formContext";
+import { join } from "path";
 
 const SubmitSection = () => {
   const [cartProducts, setCartProducts] = useState<CartType>([]);
@@ -13,23 +14,14 @@ const SubmitSection = () => {
   const [totalPrice, setTotalPrice] = useState<number>(0);
   const {
     formInfo,
-    nameError,
     setNameError,
-    emailError,
     setEmailError,
-    phoneNumberError,
     setPhoneNumberError,
-    addressError,
     setAddressError,
-    zipCodeError,
     setZipCodeError,
-    cityError,
     setCityError,
-    countryError,
     setCountryError,
-    eMoneyNumberError,
     setEMoneyNumberError,
-    eMoneyPINError,
     setEMoneyPINError,
   } = useContext(FormContext);
 
@@ -63,7 +55,7 @@ const SubmitSection = () => {
     run();
   }, []);
 
-  const handleFormSubmit = (e: React.FormEvent<HTMLButtonElement>) => {
+  const handleFormSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const checkoutInfo = {
       name: formInfo.name,
@@ -73,13 +65,82 @@ const SubmitSection = () => {
       zipCode: formInfo.zipCode,
       city: formInfo.city,
       country: formInfo.country,
-      eMoneyNumber: formInfo.eMoneyNumber,
-      eMoneyPIN: formInfo.eMoneyPIN,
+      eMoneyNumber: formInfo.cashOnDelivery ? undefined : formInfo.eMoneyNumber,
+      eMoneyPIN: formInfo.cashOnDelivery ? undefined : formInfo.eMoneyPIN,
     };
 
     const { error } = checkoutValidation(checkoutInfo);
+    if (error?.message.includes("name")) {
+      setNameError(error.message);
+    } else {
+      setNameError("");
+    }
 
-    console.log(error?.message);
+    if (error?.message.includes("email")) {
+      setEmailError(error.message);
+    } else {
+      setEmailError("");
+    }
+
+    if (error?.message.includes("phoneNumber")) {
+      setPhoneNumberError(error.message);
+    } else {
+      setPhoneNumberError("");
+    }
+
+    if (error?.message.includes("address")) {
+      setAddressError(error.message);
+    } else {
+      setAddressError("");
+    }
+
+    if (error?.message.includes("zipCode")) {
+      setZipCodeError(error.message);
+    } else {
+      setZipCodeError("");
+    }
+
+    if (error?.message.includes("city")) {
+      setCityError(error.message);
+    } else {
+      setCityError("");
+    }
+
+    if (error?.message.includes("country")) {
+      setCountryError(error.message);
+    } else {
+      setCountryError("");
+    }
+
+    if (error?.message.includes("eMoneyNumber")) {
+      setEMoneyNumberError(error.message);
+    } else {
+      setEMoneyNumberError("");
+    }
+
+    if (error?.message.includes("eMoneyPIN")) {
+      setEMoneyPINError(error.message);
+    } else {
+      setEMoneyPINError("");
+    }
+
+    if (!error) {
+      const res = await fetch("/api/checkout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...checkoutInfo,
+          cashOnDelivery: formInfo.cashOnDelivery,
+          eMoney: formInfo.eMoney,
+        }),
+      });
+
+      const data = await res.json();
+
+      console.log(data);
+    }
   };
   return (
     <div className={styles.summary}>

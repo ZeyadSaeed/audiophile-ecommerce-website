@@ -6,6 +6,7 @@ const nextConfig = {
       "mongodb+srv://zeyaddev:zeyaddev@ziadcluster.1sqxp.mongodb.net/audiophile-ecommerce-website?retryWrites=true&w=majority",
     BASE_URL: "http://localhost:3000",
   },
+  presets: ["next/babel"],
 };
 
 module.exports = nextConfig;
