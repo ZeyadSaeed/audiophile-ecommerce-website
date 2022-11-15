@@ -21,8 +21,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             deviceId: generateDeviceId,
           }),
         });
-        const data = await res.json();
-        console.log(data);
+        await res.json();
         return;
       }
     };
