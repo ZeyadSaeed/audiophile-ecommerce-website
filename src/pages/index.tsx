@@ -9,7 +9,6 @@ import Zx7SpeakerSection from "@/components/home/Zx7SpeakerSection";
 import Yx1earphonesSection from "@/components/home/Yx1earphonesSection";
 
 const Home: NextPage = () => {
-  console.log(process.env.NEXT_PUBLIC_VERCEL_URL);
   return (
     <main className={styles.main}>
       <Head>

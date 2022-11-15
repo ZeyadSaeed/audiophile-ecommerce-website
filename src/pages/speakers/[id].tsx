@@ -20,7 +20,7 @@ export const getStaticProps = async ({
   params: { id: string };
 }) => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/speakers/${params.id}`
+    `${process.env.VERCEL_URL}/api/speakers/${params.id}`
   );
   const speaker = await res.json();
 
@@ -32,7 +32,7 @@ export const getStaticProps = async ({
 };
 
 export const getStaticPaths = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/speakers`);
+  const res = await fetch(`${process.env.VERCEL_URL}/api/speakers`);
   const speakers = await res.json();
 
   const ids = speakers.map((speaker: ProductType) => speaker.slug);
