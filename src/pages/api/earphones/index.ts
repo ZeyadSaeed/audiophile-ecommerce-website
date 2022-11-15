@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import Product from "../../../models/ProductModel";
+import Product from "../../../models/ProductsModel";
 import dbConnect from "util/dbConnect";
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
