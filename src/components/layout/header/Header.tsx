@@ -12,7 +12,7 @@ const Header = () => {
   const [scroll, setScroll] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [isCartOpen, setIsCartOpen] = useState<boolean>(false);
-  const { pathname } = useRouter();
+  const { pathname, locale } = useRouter();
 
   const scrollEventListener = () => {
     const scrollCheck = window.scrollY < 90;
@@ -36,7 +36,10 @@ const Header = () => {
         backgroundColor: pathname === "/" ? "transparent" : "",
       }}
     >
-      <div className={styles.header__container}>
+      <div
+        className={styles.header__container}
+        style={{ flexDirection: locale === "en" ? "row" : "row-reverse" }}
+      >
         <BurgerMenu
           scroll={scroll}
           isMenuOpen={isMenuOpen}

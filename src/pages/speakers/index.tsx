@@ -5,6 +5,8 @@ import Categories from "@/components/common/categories/Categories";
 import { ProductType } from "@/types/product";
 import styles from "@/styles/Home.module.scss";
 
+const ENV = process.env.NODE_ENV;
+
 const speakers = ({ speakers }: { speakers: [ProductType] }) => {
   return (
     <main className={styles.main}>
@@ -21,7 +23,11 @@ const speakers = ({ speakers }: { speakers: [ProductType] }) => {
 };
 
 export const getStaticProps = async () => {
-  const res = await fetch(`${process.env.BASE_URL}/api/speakers`);
+  const res = await fetch(
+    `${
+      ENV === "development" ? process.env.BASE_URL : process.env.VERCEL_URL
+    }/api/speakers`
+  );
   const result = await res.json();
 
   const speakers = result.sort((a: any, b: any) => {

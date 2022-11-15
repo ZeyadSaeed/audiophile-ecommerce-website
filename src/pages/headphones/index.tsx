@@ -5,6 +5,7 @@ import { ProductType } from "@/types/product";
 import styles from "@/styles/Headphones.module.scss";
 import ProductsList from "@/components/common/ProductsList";
 
+const ENV = process.env.NODE_ENV;
 const headphones = ({ headphones }: { headphones: [ProductType] }) => {
   return (
     <main className={styles.main}>
@@ -21,7 +22,11 @@ const headphones = ({ headphones }: { headphones: [ProductType] }) => {
 };
 
 export const getStaticProps = async () => {
-  const res = await fetch(`${process.env.BASE_URL}/api/headphones`);
+  const res = await fetch(
+    `${
+      ENV === "development" ? process.env.BASE_URL : process.env.VERCEL_URL
+    }/api/headphones`
+  );
   const result = await res.json();
 
   const headphones = result.sort((a: any, b: any) => {

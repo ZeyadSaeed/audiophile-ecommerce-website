@@ -13,7 +13,7 @@ const HomeHeader = () => {
           <span>NEW PRODUCT</span>
           <h1>XX99 MARK II HEADPHONES</h1>
           <p>
-            Experience natural, lifelike audio and exceptional build quality
+            Experience natural, life like audio and exceptional build quality
             made for the passionate music enthusiast.
           </p>
           <Button

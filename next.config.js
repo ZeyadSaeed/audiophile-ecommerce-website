@@ -7,6 +7,10 @@ const nextConfig = {
     BASE_URL: "http://localhost:3000",
   },
   presets: ["next/babel"],
+  i18n: {
+    locales: ["en", "ar"],
+    defaultLocale: "en",
+  },
 };
 
 module.exports = nextConfig;

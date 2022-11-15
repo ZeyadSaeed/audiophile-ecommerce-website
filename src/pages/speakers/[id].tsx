@@ -2,6 +2,8 @@ import Head from "next/head";
 import Product from "@/components/common/product";
 import { ProductType } from "@/types/product";
 
+const ENV = process.env.NODE_ENV;
+
 const speaker = ({ speaker }: { speaker: ProductType }) => {
   return (
     <>
@@ -19,7 +21,11 @@ export const getStaticProps = async ({
 }: {
   params: { id: string };
 }) => {
-  const res = await fetch(`${process.env.BASE_URL}/api/speakers/${params.id}`);
+  const res = await fetch(
+    `${
+      ENV === "development" ? process.env.BASE_URL : process.env.VERCEL_URL
+    }/api/speakers/${params.id}`
+  );
   const speaker = await res.json();
 
   return {
