@@ -1,6 +1,8 @@
 import Head from "next/head";
 import Product from "@/components/common/product";
 import { ProductType } from "@/types/product";
+import dbConnect from "util/dbConnect";
+import ProductModel from "../../models/ProductsModel";
 
 const speaker = ({ speaker }: { speaker: ProductType }) => {
   return (
@@ -19,21 +21,24 @@ export const getStaticProps = async ({
 }: {
   params: { id: string };
 }) => {
-  const res = await fetch(
-    `${process.env.VERCEL_URL}/api/speakers/${params.id}`
-  );
-  const speaker = await res.json();
+  await dbConnect();
+  if (!params) return { props: {} };
+
+  const speaker = await ProductModel.findOne({
+    slug: params.id,
+    category: "speakers",
+  });
 
   return {
     props: {
-      speaker,
+      speaker: JSON.parse(JSON.stringify(speaker)),
     },
   };
 };
 
 export const getStaticPaths = async () => {
-  const res = await fetch(`${process.env.VERCEL_URL}/api/speakers`);
-  const speakers = await res.json();
+  await dbConnect();
+  const speakers = await ProductModel.find({ category: "speakers" });
 
   const ids = speakers.map((speaker: ProductType) => speaker.slug);
   const paths = ids.map((id: string) => ({

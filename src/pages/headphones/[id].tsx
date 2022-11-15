@@ -1,15 +1,17 @@
 import Head from "next/head";
 import Product from "@/components/common/product";
 import { ProductType } from "@/types/product";
+import dbConnect from "util/dbConnect";
+import ProductModel from "../../models/ProductsModel";
 
-const headphone = ({ headphone }: { headphone: ProductType }) => {
+const headphone = ({ headphones }: { headphones: ProductType }) => {
   return (
     <>
       <Head>
         <title>{headphone.name}</title>
         <link rel="icon" href="/favicon.png" />
       </Head>
-      <Product product={headphone} />
+      <Product product={headphones} />
     </>
   );
 };
@@ -19,21 +21,24 @@ export const getStaticProps = async ({
 }: {
   params: { id: string };
 }) => {
-  const res = await fetch(
-    `${process.env.VERCEL_URL}/api/headphones/${params.id}`
-  );
-  const headphone = await res.json();
+  await dbConnect();
+  if (!params) return { props: {} };
+
+  const headphones = await ProductModel.findOne({
+    slug: params.id,
+    category: "headphones",
+  });
 
   return {
     props: {
-      headphone,
+      headphones: JSON.parse(JSON.stringify(headphones)),
     },
   };
 };
 
 export const getStaticPaths = async () => {
-  const res = await fetch(`${process.env.VERCEL_URL}/api/headphones`);
-  const headphones = await res.json();
+  await dbConnect();
+  const headphones = await ProductModel.find({ category: "headphones" });
 
   const ids = headphones.map((headphone: ProductType) => headphone.slug);
   const paths = ids.map((id: string) => ({

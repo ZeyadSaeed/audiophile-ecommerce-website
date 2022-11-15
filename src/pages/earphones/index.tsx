@@ -4,6 +4,8 @@ import { ProductType } from "@/types/product";
 import ProductsList from "@/components/common/ProductsList";
 import Categories from "@/components/common/categories/Categories";
 import styles from "@/styles/Home.module.scss";
+import dbConnect from "util/dbConnect";
+import ProductModel from "../../models/ProductsModel";
 
 const earphones = ({ earphones }: { earphones: [ProductType] }) => {
   return (
@@ -21,8 +23,9 @@ const earphones = ({ earphones }: { earphones: [ProductType] }) => {
 };
 
 export const getStaticProps = async () => {
-  const res = await fetch(`${process.env.VERCEL_URL}/api/earphones`);
-  const result = await res.json();
+  await dbConnect();
+  const res = await ProductModel.find({ category: "earphones" });
+  const result = JSON.parse(JSON.stringify(res));
 
   const earphones = result.sort((a: any, b: any) => {
     if (a.name > b.name) return -1;
