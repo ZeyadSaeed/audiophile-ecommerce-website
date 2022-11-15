@@ -21,7 +21,9 @@ const earphones = ({ earphones }: { earphones: [ProductType] }) => {
 };
 
 export const getStaticProps = async () => {
-  const res = await fetch(`${process.env.BASE_URL}/api/earphones`);
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/earphones`
+  );
   const result = await res.json();
 
   const earphones = result.sort((a: any, b: any) => {

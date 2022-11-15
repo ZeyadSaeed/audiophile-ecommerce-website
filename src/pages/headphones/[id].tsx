@@ -20,7 +20,7 @@ export const getStaticProps = async ({
   params: { id: string };
 }) => {
   const res = await fetch(
-    `${process.env.BASE_URL}/api/headphones/${params.id}`
+    `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/headphones/${params.id}`
   );
   const headphone = await res.json();
 
@@ -32,7 +32,9 @@ export const getStaticProps = async ({
 };
 
 export const getStaticPaths = async () => {
-  const res = await fetch(`${process.env.BASE_URL}/api/headphones`);
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/headphones`
+  );
   const headphones = await res.json();
 
   const ids = headphones.map((headphone: ProductType) => headphone.slug);
