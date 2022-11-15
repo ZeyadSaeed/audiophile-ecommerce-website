@@ -8,15 +8,13 @@ const SocialMediaLinks = () => {
     <ul>
       {socialLinks.map((link) => (
         <li key={link}>
-          <Link href={`https://${link}.com`} passHref>
-            <a>
-              <Image
-                width={24}
-                height={24}
-                src={`/shared/desktop/icon-${link}.svg`}
-                alt={link}
-              />
-            </a>
+          <Link href={`https://${link}.com`} passHref target="_blank">
+            <Image
+              width={24}
+              height={24}
+              src={`/shared/desktop/icon-${link}.svg`}
+              alt={link}
+            />
           </Link>
         </li>
       ))}

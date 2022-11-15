@@ -36,25 +36,25 @@ const Button = ({
     e.target.style.backgroundColor = "#D87D4A";
   };
   return (
-    <Link href={link} passHref>
-      <a
-        onMouseEnter={(e) => onMouseEnter(e)}
-        onMouseLeave={(e) => onMouseLeave(e)}
-        style={{
-          backgroundColor:
-            color === "black"
-              ? "black"
-              : color === "transparent"
-              ? "transparent"
-              : "",
-          border: color === "transparent" ? "1px solid black" : "",
-          color: color === "transparent" ? "black" : "",
-          width: customStyles,
-        }}
-        className={styles.seeProduct}
-      >
-        {title}
-      </a>
+    <Link
+      href={link}
+      passHref
+      onMouseEnter={(e) => onMouseEnter(e)}
+      onMouseLeave={(e) => onMouseLeave(e)}
+      style={{
+        backgroundColor:
+          color === "black"
+            ? "black"
+            : color === "transparent"
+            ? "transparent"
+            : "",
+        border: color === "transparent" ? "1px solid black" : "",
+        color: color === "transparent" ? "black" : "",
+        width: customStyles,
+      }}
+      className={styles.seeProduct}
+    >
+      {title}
     </Link>
   );
 };

@@ -38,10 +38,12 @@ const NavLinks = ({
       style={{ flexDirection: locale === "en" ? "row" : "row-reverse" }}
     >
       {navLinks.map((link) => (
-        <Link href={link === "/home" ? "/" : link} key={link}>
-          <a className={linkClass}>
-            {locale === "en" ? link.slice(1) : arabicNav(link)}
-          </a>
+        <Link
+          href={link === "/home" ? "/" : link}
+          key={link}
+          className={linkClass}
+        >
+          {locale === "en" ? link.slice(1) : arabicNav(link)}
         </Link>
       ))}
     </nav>

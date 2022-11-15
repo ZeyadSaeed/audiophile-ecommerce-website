@@ -20,16 +20,14 @@ const category = ({
         <Image src={img} width={width} height={height} alt={title} />
       </div>
       <h1>{title}</h1>
-      <Link href={"/" + title}>
-        <a>
-          shop{" "}
-          <img
-            src="/shared/desktop/icon-arrow-right.svg"
-            width={7}
-            height={10}
-            alt="arrow"
-          />
-        </a>
+      <Link href={"/" + title} passHref>
+        shop{" "}
+        <img
+          src="/shared/desktop/icon-arrow-right.svg"
+          width={7}
+          height={10}
+          alt="arrow"
+        />
       </Link>
     </div>
   );
