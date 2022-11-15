@@ -52,7 +52,12 @@ const OrderSubmitted = ({
               .map(({ _id, product, quantity }) => (
                 <li key={_id}>
                   <div>
-                    <Image src={product.cartImage} width={50} height={50} />
+                    <Image
+                      src={product.cartImage}
+                      alt={product.name}
+                      width={50}
+                      height={50}
+                    />
 
                     <b className={styles.productName}>
                       {product.cartName}
