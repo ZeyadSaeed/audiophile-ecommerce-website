@@ -20,7 +20,11 @@ export const getStaticProps = async ({
 }: {
   params: { id: string };
 }) => {
-  const res = await fetch(`${process.env.BASE_URL}/api/earphones/${params.id}`);
+  const res = await fetch(
+    `${
+      ENV === "development" ? process.env.BASE_URL : process.env.VERCEL_URL
+    }/api/earphones/${params.id}`
+  );
   const earphones = await res.json();
 
   return {
