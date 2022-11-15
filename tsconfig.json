@@ -26,6 +26,7 @@
     "custom.d.ts",
     "**/*.ts",
     "**/*.tsx",
+    "src/**/*",
     "src/util/dbConnect.js"
   ],
   "exclude": ["node_modules"]
