@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import styles from "@/styles/Product.module.scss";
 import { ImagesType } from "@/types/product";
-import SeeProductBtn from "../../SeeProductBtn";
+import Button from "../../Button";
 
 interface RecommendedProps {
   products: [
@@ -31,7 +31,8 @@ const RecommendedProducts = ({ products }: RecommendedProps) => {
 
             <h2>{name}</h2>
 
-            <SeeProductBtn
+            <Button
+              title="SEE PRODUCT"
               color="brown"
               link={`/${
                 slug.slice(-10) === "headphones"

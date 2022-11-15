@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import styles from "@/styles/Home.module.scss";
-import SeeProductBtn from "../common/SeeProductBtn";
+import Button from "../common/Button";
 
 const Zx9SpeakerSection = () => {
   return (
@@ -34,7 +34,11 @@ const Zx9SpeakerSection = () => {
             Upgrade to premium speakers that are phenomenally built to deliver
             truly remarkable sound.
           </p>
-          <SeeProductBtn link="/speakers/zx9-speaker" color="black" />
+          <Button
+            title="SEE PRODUCT"
+            link="/speakers/zx9-speaker"
+            color="black"
+          />
         </div>
       </div>
     </section>

@@ -1,7 +1,17 @@
 import styles from "@/styles/Common.module.scss";
 import Link from "next/link";
 
-const SeeProductBtn = ({ link, color }: { link: string; color: string }) => {
+const Button = ({
+  title,
+  link,
+  color,
+  customStyles,
+}: {
+  title: string;
+  link: string;
+  color: string;
+  customStyles?: string;
+}) => {
   const onMouseEnter = (e: any) => {
     if (color === "black") {
       e.target.style.backgroundColor = "#4C4C4C";
@@ -21,7 +31,6 @@ const SeeProductBtn = ({ link, color }: { link: string; color: string }) => {
     } else if (color === "transparent") {
       e.target.style.backgroundColor = "transparent";
       e.target.style.color = "black";
-
       return;
     }
     e.target.style.backgroundColor = "#D87D4A";
@@ -40,12 +49,13 @@ const SeeProductBtn = ({ link, color }: { link: string; color: string }) => {
               : "",
           border: color === "transparent" ? "1px solid black" : "",
           color: color === "transparent" ? "black" : "",
+          width: customStyles,
         }}
         className={styles.seeProduct}
       >
-        see product
+        {title}
       </a>
     </Link>
   );
 };
-export default SeeProductBtn;
+export default Button;

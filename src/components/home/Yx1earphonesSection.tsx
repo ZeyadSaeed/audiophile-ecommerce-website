@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import styles from "@/styles/Home.module.scss";
-import SeeProductBtn from "../common/SeeProductBtn";
+import Button from "../common/Button";
 
 const Yx1earphonesSection = () => {
   return (
@@ -21,7 +21,11 @@ const Yx1earphonesSection = () => {
         </div>
         <div>
           <h1>yx1 earphones</h1>
-          <SeeProductBtn link="/earphones/yx1-earphones" color="transparent" />
+          <Button
+            title="SEE PRODUCT"
+            link="/earphones/yx1-earphones"
+            color="transparent"
+          />
         </div>
       </div>
     </section>

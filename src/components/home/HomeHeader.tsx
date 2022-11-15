@@ -1,9 +1,11 @@
 import styles from "@/styles/Home.module.scss";
-import SeeProductBtn from "../common/SeeProductBtn";
+import Button from "../common/Button";
+import Header from "../layout/header/Header";
 
 const HomeHeader = () => {
   return (
     <header className={styles.headerContainer}>
+      <Header />
       <div className={styles.container}>
         <div></div>
 
@@ -14,8 +16,8 @@ const HomeHeader = () => {
             Experience natural, lifelike audio and exceptional build quality
             made for the passionate music enthusiast.
           </p>
-
-          <SeeProductBtn
+          <Button
+            title="SEE PRODUCT"
             link="/headphones/xx99-mark-two-headphones"
             color="brown"
           />

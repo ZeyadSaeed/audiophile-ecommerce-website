@@ -180,6 +180,7 @@
       .checkoutBtn {
         width: 100%;
         background-color: $brown;
+        cursor: pointer;
         color: $white;
         height: 48px;
         font-size: 13px;
@@ -532,6 +533,7 @@
     transform: scaleY(1);
   }
 }
+
 @keyframes navBarCloseAnimation {
   from {
     transform: scaleY(1);

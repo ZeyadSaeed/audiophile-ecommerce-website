@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
+import { CartType } from "./product";
 
 interface StaticInfo {
   name: string;
@@ -10,11 +11,22 @@ interface StaticInfo {
   country: string;
 }
 
+export interface CheckoutChildrenProps {
+  cartProducts: CartType;
+  isLoading: boolean;
+  totalPrice: number;
+}
+
 export interface CheckoutInfoInterface extends StaticInfo {
   eMoney: boolean;
   cashOnDelivery: boolean;
   eMoneyNumber?: string;
   eMoneyPIN?: string;
+  orderedProducts: {
+    id: string;
+    productName: string;
+    quantity: number;
+  }[];
 }
 
 export interface CheckoutErrorsInterface extends StaticInfo {
@@ -43,4 +55,8 @@ export type CheckoutContextType = {
   setEMoneyNumberError: Dispatch<SetStateAction<string>>;
   eMoneyPINError: string;
   setEMoneyPINError: Dispatch<SetStateAction<string>>;
+  isFormSubmitted: boolean;
+  setIsFormSubmitted: Dispatch<SetStateAction<boolean>>;
+  loading: boolean;
+  setLoading: Dispatch<SetStateAction<boolean>>;
 };

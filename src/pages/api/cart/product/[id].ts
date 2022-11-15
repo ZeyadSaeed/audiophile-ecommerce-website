@@ -1,8 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import connectDB from "util/dbConnect";
+import dbConnect from "util/dbConnect";
 import User from "../../../../models/UserModel";
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
+  await dbConnect();
+
   if (req.method === "DELETE") {
     await User.updateOne(
       { deviceId: req.query.id },
@@ -18,4 +20,4 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     res.status(200).send("Deleted.");
   }
 }
-export default connectDB(handler);
+export default handler;

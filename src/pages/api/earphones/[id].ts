@@ -1,8 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import Product from "../../../models/ProductModel";
-import connectDB from "util/dbConnect";
+import dbConnect from "util/dbConnect";
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
+  await dbConnect();
+
   try {
     const earphones = await Product.findOne({
       slug: req.query.id,
@@ -14,4 +16,4 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 }
 
-export default connectDB(handler);
+export default handler;

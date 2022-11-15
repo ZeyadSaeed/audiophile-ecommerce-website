@@ -1,8 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import connectDB from "util/dbConnect";
+import dbConnect from "util/dbConnect";
 import Checkout from "../../models/CheckoutModel";
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
+  await dbConnect();
+
   if (req.method === "POST") {
     try {
       const checkout = new Checkout({
@@ -17,14 +19,15 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
         cashOnDelivery: req.body.cashOnDelivery,
         eMoneyNumber: req.body.eMoneyNumber,
         eMoneyPIN: req.body.eMoneyPIN,
+        orderedProducts: req.body.orderedProducts,
       });
 
       checkout.save();
-      res.status(201).json({ checkout });
+      res.status(201).json({ message: "Checkout created successfully!" });
     } catch (err) {
       res.status(500).send("unexpected error");
     }
   }
 }
 
-export default connectDB(handler);
+export default handler;

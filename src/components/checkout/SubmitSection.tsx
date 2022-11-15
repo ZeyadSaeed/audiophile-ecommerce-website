@@ -1,17 +1,17 @@
-import { CartType, ProductType } from "@/types/product";
 import Image from "next/image";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { SpinnerCircularFixed } from "spinners-react";
 import styles from "@/styles/Checkout.module.scss";
 import { checkoutValidation } from "../../validators/checkoutValidator";
-import { CheckoutInfoInterface } from "@/types/checkoutTypes";
+import { CheckoutChildrenProps } from "@/types/checkoutTypes";
 import { FormContext } from "./../../contexts/formContext";
-import { join } from "path";
+import errorCheck from "./errorCheck";
 
-const SubmitSection = () => {
-  const [cartProducts, setCartProducts] = useState<CartType>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [totalPrice, setTotalPrice] = useState<number>(0);
+const SubmitSection = ({
+  cartProducts,
+  isLoading,
+  totalPrice,
+}: CheckoutChildrenProps) => {
   const {
     formInfo,
     setNameError,
@@ -23,37 +23,10 @@ const SubmitSection = () => {
     setCountryError,
     setEMoneyNumberError,
     setEMoneyPINError,
+    setIsFormSubmitted,
+    setLoading,
+    loading,
   } = useContext(FormContext);
-
-  useEffect(() => {
-    setIsLoading(true);
-
-    const run = async () => {
-      try {
-        const deviceId = localStorage.getItem("device");
-        const res = await fetch(`/api/cart/${deviceId}`);
-        const { cartProducts } = await res.json();
-
-        const prices = cartProducts.map(
-          ({ product, quantity }: { product: ProductType; quantity: number }) =>
-            product.price * quantity
-        );
-        const initialPrice = 0;
-        const totalPrices = prices.reduce(
-          (prev: number, current: number) => prev + current,
-          initialPrice
-        );
-        setTotalPrice(Math.round(totalPrices));
-
-        setCartProducts(cartProducts);
-        setIsLoading(false);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    run();
-  }, []);
 
   const handleFormSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -69,77 +42,60 @@ const SubmitSection = () => {
       eMoneyPIN: formInfo.cashOnDelivery ? undefined : formInfo.eMoneyPIN,
     };
 
+    const orderedProducts = cartProducts.map((product) => {
+      return {
+        id: product._id,
+        productName: product.product.name,
+        quantity: product.quantity,
+      };
+    });
+
     const { error } = checkoutValidation(checkoutInfo);
-    if (error?.message.includes("name")) {
-      setNameError(error.message);
-    } else {
-      setNameError("");
-    }
 
-    if (error?.message.includes("email")) {
-      setEmailError(error.message);
-    } else {
-      setEmailError("");
-    }
-
-    if (error?.message.includes("phoneNumber")) {
-      setPhoneNumberError(error.message);
-    } else {
-      setPhoneNumberError("");
-    }
-
-    if (error?.message.includes("address")) {
-      setAddressError(error.message);
-    } else {
-      setAddressError("");
-    }
-
-    if (error?.message.includes("zipCode")) {
-      setZipCodeError(error.message);
-    } else {
-      setZipCodeError("");
-    }
-
-    if (error?.message.includes("city")) {
-      setCityError(error.message);
-    } else {
-      setCityError("");
-    }
-
-    if (error?.message.includes("country")) {
-      setCountryError(error.message);
-    } else {
-      setCountryError("");
-    }
-
-    if (error?.message.includes("eMoneyNumber")) {
-      setEMoneyNumberError(error.message);
-    } else {
-      setEMoneyNumberError("");
-    }
-
-    if (error?.message.includes("eMoneyPIN")) {
-      setEMoneyPINError(error.message);
-    } else {
-      setEMoneyPINError("");
+    if (error?.message) {
+      errorCheck(
+        error?.message,
+        setNameError,
+        setEmailError,
+        setPhoneNumberError,
+        setAddressError,
+        setZipCodeError,
+        setCityError,
+        setCountryError,
+        setEMoneyNumberError,
+        setEMoneyPINError
+      );
     }
 
     if (!error) {
+      setLoading(true);
+      setNameError("");
+      setEmailError("");
+      setPhoneNumberError("");
+      setAddressError("");
+      setZipCodeError("");
+      setCityError("");
+      setCountryError("");
+      setEMoneyNumberError("");
+      setEMoneyPINError("");
+      setIsFormSubmitted(true);
+
       const res = await fetch("/api/checkout", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
+        // ADD ORDERED PRODUCTS TO CHECKOUT FORM
         body: JSON.stringify({
           ...checkoutInfo,
           cashOnDelivery: formInfo.cashOnDelivery,
           eMoney: formInfo.eMoney,
+          orderedProducts,
         }),
       });
 
-      const data = await res.json();
-
-      console.log(data);
+      await res.json();
+      setLoading(false);
     }
   };
   return (
@@ -193,7 +149,17 @@ const SubmitSection = () => {
               <p>GRAND TOTAL</p> <b>$ {totalPrice + 50}</b>
             </div>
 
-            <button onClick={(e) => handleFormSubmit(e)}>CONTINUE & PAY</button>
+            <button onClick={(e) => handleFormSubmit(e)} disabled={loading}>
+              {!loading ? (
+                "CONTINUE & PAY"
+              ) : (
+                <SpinnerCircularFixed
+                  size={24}
+                  color="#fff"
+                  secondaryColor="none"
+                />
+              )}
+            </button>
           </div>
         </>
       )}

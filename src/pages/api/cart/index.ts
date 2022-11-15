@@ -1,8 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import connectDB from "util/dbConnect";
+import dbConnect from "util/dbConnect";
 import User from "../../../models/UserModel";
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
+  await dbConnect();
+
   if (req.method === "POST") {
     try {
       const product = await User.findOne({
@@ -51,4 +53,4 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 }
 
-export default connectDB(handler);
+export default handler;

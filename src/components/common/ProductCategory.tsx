@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { ProductType } from "@/types/product";
-import SeeProductBtn from "./SeeProductBtn";
+import Button from "./Button";
 import { useRouter } from "next/router";
 
 const Product = ({ productDetails }: { productDetails: ProductType }) => {
@@ -28,7 +28,11 @@ const Product = ({ productDetails }: { productDetails: ProductType }) => {
           {secondName}
         </h1>
         <p>{description}</p>
-        <SeeProductBtn color="brown" link={pathname + "/" + slug} />
+        <Button
+          title="SEE PRODUCT"
+          color="brown"
+          link={pathname + "/" + slug}
+        />
       </div>
     </li>
   );

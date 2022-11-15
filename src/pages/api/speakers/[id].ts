@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import Product from "../../../models/ProductModel";
-import connectDB from "util/dbConnect";
+import dbConnect from "util/dbConnect";
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
@@ -14,4 +14,4 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 }
 
-export default connectDB(handler);
+export default handler;

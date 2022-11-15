@@ -8,7 +8,7 @@ const Layout = ({ children }: LayoutProps) => {
   const { pathname } = useRouter();
   return (
     <>
-      <Header />
+      {pathname === "/" ? null : <Header />}
       {children}
       {pathname !== "/checkout" && <BestGearSection />}
       <Footer />

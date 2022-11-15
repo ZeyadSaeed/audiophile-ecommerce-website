@@ -1,9 +1,9 @@
 import { useState, MouseEvent, useEffect } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { CartType, ProductType } from "@/types/product";
 import { SpinnerCircularFixed } from "spinners-react";
 import styles from "@/styles/Layout.module.scss";
+import { useRouter } from "next/router";
 
 const INCREMENT = "INCREMENT";
 const DECREMENT = "DECREMENT";
@@ -22,6 +22,7 @@ const Cart = ({
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [products, setProducts] = useState<CartType>([]);
   const [totalPrice, setTotalPrice] = useState(0);
+  const router = useRouter();
 
   useEffect(() => {
     const prices = products.map(
@@ -141,6 +142,12 @@ const Cart = ({
       }
     }
   };
+
+  const handleGoToCheckoutPage = () => {
+    router.pathname !== "/checkout"
+      ? router.push("/checkout")
+      : router.reload();
+  };
   return (
     <>
       <button onClick={handleCartClick} className={styles.cart}>
@@ -239,9 +246,7 @@ const Cart = ({
                     className={styles.checkoutBtn}
                     onClick={() => setIsCartOpen(false)}
                   >
-                    <Link passHref href="/checkout">
-                      <a>CHECKOUT</a>
-                    </Link>
+                    <a onClick={handleGoToCheckoutPage}>CHECKOUT</a>
                   </div>
                 </>
               )}

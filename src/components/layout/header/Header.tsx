@@ -33,7 +33,7 @@ const Header = () => {
     <header
       className={styles.header}
       style={{
-        backgroundColor: pathname === "/" ? "#191919" : "",
+        backgroundColor: pathname === "/" ? "transparent" : "",
       }}
     >
       <div className={styles.header__container}>

@@ -18,6 +18,13 @@ const FORM_INFO = {
   cashOnDelivery: false,
   eMoneyNumber: "",
   eMoneyPIN: "",
+  orderedProducts: [
+    {
+      id: "",
+      productName: "",
+      quantity: 0,
+    },
+  ],
 };
 
 export const FormContext = createContext<CheckoutContextType>(
@@ -35,6 +42,8 @@ export function FormContextWrapper({ children }: { children: ReactNode }) {
   const [countryError, setCountryError] = useState<string>("");
   const [eMoneyNumberError, setEMoneyNumberError] = useState<string>("");
   const [eMoneyPINError, setEMoneyPINError] = useState<string>("");
+  const [isFormSubmitted, setIsFormSubmitted] = useState<boolean>(false);
+  const [loading, setLoading] = useState(false);
 
   return (
     <FormContext.Provider
@@ -59,6 +68,10 @@ export function FormContextWrapper({ children }: { children: ReactNode }) {
         setEMoneyNumberError,
         eMoneyPINError,
         setEMoneyPINError,
+        isFormSubmitted,
+        setIsFormSubmitted,
+        loading,
+        setLoading,
       }}
     >
       {children}

@@ -1,8 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import connectDB from "util/dbConnect";
+import dbConnect from "util/dbConnect";
 import User from "../../../models/UserModel";
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
+  await dbConnect();
+
   if (req.method === "GET") {
     const cartProducts = await User.findOne({ deviceId: req.query.id })
       .populate("cartProducts.product")
@@ -56,4 +58,4 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     res.status(200).send("Updated.");
   }
 }
-export default connectDB(handler);
+export default handler;

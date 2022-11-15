@@ -1,5 +1,5 @@
 import { CheckoutInfoInterface } from "@/types/checkoutTypes";
-import { Schema, model, models } from "mongoose";
+import mongoose, { Schema, model, models } from "mongoose";
 
 const checkoutSchema: Schema = new Schema<CheckoutInfoInterface>({
   name: {
@@ -40,6 +40,13 @@ const checkoutSchema: Schema = new Schema<CheckoutInfoInterface>({
   },
   eMoneyNumber: String,
   eMoneyPIN: String,
+  orderedProducts: [
+    {
+      id: mongoose.Types.ObjectId,
+      productName: String,
+      quantity: Number,
+    },
+  ],
 });
 
 export default models.Checkout || model("Checkout", checkoutSchema);
